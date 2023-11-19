@@ -1,12 +1,12 @@
-const name ="RYAN"
-module.exports = {
- name,
-};
+import express from 'express';
+import { readdirSync } from 'fs';
+
 const express = require("express");
 
 const app = express();
 
-app.get("/api/:message", (req, res) => {
-     res.status(200).send(req.params.message);
-     });  
-app.listen(8000, () => console.log(`Sever is running on port 8000`));
+readdirSync("./routes").map((r) => 
+app.use("/api", require(`./routes/${r}`)));
+
+app.listen(8000, () => 
+console.log(`Sever is running on port 8000`));
